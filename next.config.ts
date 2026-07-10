@@ -13,6 +13,10 @@ const withNextra = nextra({
 });
 
 export default withNextra({
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
   reactStrictMode: true,
   turbopack: {
     resolveAlias: {

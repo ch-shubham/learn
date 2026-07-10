@@ -42,3 +42,7 @@ These rules exist because we broke the build several times finding them out. Fol
 ## TODOs
 
 - `resolutions: { zod: "4.3.6" }` This pins around the Zod 4.4 bug we hit earlier (nextra#5008). It's the right move fornow, but worth periodically checking if Nextra ships an official fix so you can remove the pin and stay current with Zod. [Open Issue](https://github.com/shuding/nextra/issues/4989)
+
+## Issues
+
+- Update the node version in nixpacks if deployment fails.

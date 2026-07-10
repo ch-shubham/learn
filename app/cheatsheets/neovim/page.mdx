@@ -1,0 +1,256 @@
+---
+title: Neovim Cheatsheet
+description: A quick reference for common Neovim commands and shortcuts.
+difficulty: Beginner
+tags:
+  - neovim
+  - vim
+  - cheatsheet
+---
+
+import { Callout } from "nextra/components";
+
+## Try It Live — No Setup Required
+
+**[Playground](https://nvim.chaudharyshubham.com)**
+
+Skip the installation. Practice real Vim motions — `hjkl`, `dd`, `yy`, `ciw`, `:%s/old/new/g` — directly in your browser, zero consequences.
+
+<Callout type="info">
+  Some command-mode features may behave differently since there's no real
+  filesystem involved — although it's possible, that would kind of destroy the
+  idea of a playground. So enjoy, break things, and try everything mentioned
+  here freely.
+</Callout>
+
+## Setup (one-time)
+
+- `brew install neovim`
+- `git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim`
+  - Clone the kickstart repo. It will do the basic setup and config including installing the new tools and software required like fzf, fd etc
+- `nvim   # then run :Tutor`
+  - Run and read Tutor as a 1st step completely. Short and useful extract mentioned below.
+
+---
+
+**Formula:** `operator + [number] + motion` — e.g. `d2w` delete 2 words · `3e` jump 3 word-ends · `2dd` delete 2 lines
+
+---
+
+## Navigation
+
+| Key        | Action            | Example               |
+| ---------- | ----------------- | --------------------- |
+| `h j k l`  | ← ↓ ↑ →           | basic movement        |
+| `w`        | next word start   | \|foo bar`→`foo \|bar |
+| `e`        | word end          | \|foo`→`foo\|         |
+| `b`        | word back         | foo \|bar`→`\|foo bar |
+| `2w`       | 2 words forward   | \|a b c`→`a b \|c     |
+| `3e`       | end of 3rd word   | skips 3 word endings  |
+| `0`        | line start        | any pos → \|start     |
+| `$`        | line end          | any pos → end\|       |
+| `gg`       | file start        | line 1                |
+| `G`        | file end          | last line             |
+| `{n}G`     | go to line n      | 45G → line 45         |
+| `f{c}`     | jump to char      | fe → next 'e'         |
+| `f<Space>` | jump to space     | next word boundary    |
+| `;`        | repeat f forward  | next occurrence       |
+| `,`        | repeat f backward | prev occurrence       |
+| `%`        | matching bracket  | on `(` → jumps to `)` |
+| `Ctrl+o`   | jump back         | after `gd`, go back   |
+| `Ctrl+i`   | jump forward      | redo the jump         |
+
+---
+
+## Insert Mode
+
+| Key | Action               | Example                  |
+| --- | -------------------- | ------------------------ |
+| `i` | insert before cursor | types before \|h         |
+| `a` | append after cursor  | types after h\|          |
+| `A` | append end of line   | jumps to end, insert     |
+| `o` | new line below       | blank line, enter insert |
+| `O` | new line above       | blank line above, insert |
+| `R` | replace until ESC    | overwrites existing text |
+
+---
+
+## Operators + Motions
+
+| Key    | Action               | Example                         |
+| ------ | -------------------- | ------------------------------- |
+| `dw`   | delete word          | \|foo bar`→`\|bar               |
+| `d2w`  | delete 2 words       | \|foo bar baz`→`\|baz           |
+| `d6w`  | delete 6 words       | any count works                 |
+| `dd`   | delete line          | whole line removed              |
+| `2dd`  | delete 2 lines       | removes next 2 lines            |
+| `d$`   | delete to line end   | foo \|bar`→`foo                 |
+| `d0`   | delete to line start | foo \|bar`→`bar                 |
+| `x`    | delete char          | \|foo`→`\|oo                    |
+| `ce`   | change to word end   | \|hello` → delete + insert mode |
+| `c{m}` | change + motion      | `c2w`, `c$` etc.                |
+| `r{c}` | replace char         | `rx` → char under cursor → x    |
+
+> Prefix with a number to repeat — e.g. `d3w`, `2dd`, `3e`
+
+---
+
+## Undo / Redo
+
+| Key      | Action          | Example                    |
+| -------- | --------------- | -------------------------- |
+| `u`      | undo            | keep pressing to undo more |
+| `U`      | undo whole line | restores line to original  |
+| `Ctrl+r` | redo            | opposite of u              |
+
+---
+
+## Copy & Paste
+
+| Key   | Action              | Example                      |
+| ----- | ------------------- | ---------------------------- |
+| `yy`  | yank line           | copies whole line            |
+| `y3w` | yank 3 words        | by spaces                    |
+| `y3e` | yank 3 words        | by word endings              |
+| `yap` | yank paragraph      | copies whole paragraph block |
+| `p`   | paste after cursor  | \|foo`→`foo pasted           |
+| `P`   | paste before cursor | \|foo`→`pasted foo           |
+
+---
+
+## Visual Mode
+
+| Key            | Action                  | Example                      |
+| -------------- | ----------------------- | ---------------------------- |
+| `v`            | visual select           | move cursor to expand        |
+| `v → y`        | yank selection          | select then y to copy        |
+| `v → d`        | delete selection        | select then d to cut         |
+| `:'<,'>w FILE` | write selection to file | saves selected lines to FILE |
+
+---
+
+## Search & Replace
+
+| Key               | Action          | Example                       |
+| ----------------- | --------------- | ----------------------------- |
+| `/{text}`         | search forward  | `/foo` → finds foo            |
+| `?{text}`         | search backward | `?foo` → finds foo ↑          |
+| `n`               | next match      | after `/`, keep going forward |
+| `N`               | prev match      | go backward                   |
+| `:s/old/new`      | first in line   | replaces 1st match only       |
+| `:s/old/new/g`    | all in line     | g = global on this line       |
+| `:2,5s/old/new/g` | lines 2–5       | range substitution            |
+| `:%s/old/new/g`   | whole file      | % = whole file                |
+| `:%s/old/new/gc`  | confirm each    | asks y/n per match            |
+
+---
+
+## Files & External Commands
+
+| Key           | Action                   | Example          |
+| ------------- | ------------------------ | ---------------- |
+| `:r {file}`   | insert file below cursor | `:r notes.txt`   |
+| `:r !{cmd}`   | insert command output    | `:r !ls`         |
+| `:!{cmd}`     | run shell command        | `:!pwd`          |
+| `:e $MYVIMRC` | open init.lua            | your nvim config |
+
+---
+
+## Help & Discovery
+
+| Key                     | Action                     | Example                   |
+| ----------------------- | -------------------------- | ------------------------- |
+| `:help`                 | open help                  | general help window       |
+| `:help {cmd}`           | help for a command         | `:help w`                 |
+| `:help nvim-quickstart` | quickstart guide           | kickstart overview        |
+| `K`                     | docs for word under cursor | Shift+k on any word       |
+| `:e Ctrl+d`             | list matching commands     | shows all `:e…` commands  |
+| `:pw Ctrl+d`            | list matching commands     | shows all `:pw…` commands |
+| `Tab`                   | autocomplete command       | `:e` + Tab                |
+
+---
+
+## Windows
+
+| Key        | Action           | Example               |
+| ---------- | ---------------- | --------------------- |
+| `Ctrl+w w` | switch windows   | cycles through splits |
+| `:vs`      | vertical split   | side by side files    |
+| `:sp`      | horizontal split | top/bottom files      |
+
+---
+
+## Settings & Options
+
+```vim
+:set ic              " ignore case in search
+:set hls             " highlight search matches
+:set is              " incremental search (highlights as you type)
+:lua vim.opt.number = true   " show line numbers
+:lua vim.opt.number = false  " hide line numbers
+```
+
+---
+
+## Leader Key (Space)
+
+> Press **Space** and wait 1 sec — which-key popup shows all available commands.
+
+| Key             | Action                 | Example                    |
+| --------------- | ---------------------- | -------------------------- |
+| `Space sf`      | search files           | fuzzy file finder          |
+| `Space sg`      | live grep              | search text across project |
+| `Space sh`      | search help            | very helpful               |
+| `Space sw`      | grep word under cursor | find usages                |
+| `Space sk`      | search keymaps         | find all shortcuts         |
+| `Space s.`      | recent files           | last opened files          |
+| `Space <Space>` | open buffers           | switch between open files  |
+| `Space rn`      | rename symbol          | renames everywhere (LSP)   |
+| `Space ca`      | code action            | fix / auto-import (LSP)    |
+| `Space ds`      | document symbols       | all methods in file (LSP)  |
+
+---
+
+## Keymapping
+
+Bind keys to actions in `init.lua`:
+
+```lua
+keymap(MODE, KEYS, FUNCTION, OPTIONS)
+-- MODE: "n" = normal · "i" = insert · "v" = visual
+```
+
+## Autocommands
+
+Like event listeners — triggered by Neovim events. Example: when you yank (`y`), automatically highlight the yanked text. Defined in `init.lua`.
+
+---
+
+## DSA Practice shortcuts
+
+- `<leader> t r` -> Toggle relative number
+- `<leader> t i` -> Toggle interview mode
+- `<leader> n p` -> Create new problem with java template in under directory -> `/Users/shubham/Workspace/PREP/SDE3-Prep/practice/Slug_YYYY_MM_DD`
+- `gcc` -> Comment one line. TODO: Need more research on better commenting if possible.
+- `<leader> p l` -> Logs the problem
+- `<leader> p r` -> Logs review
+- `<leader> t` -> Start 45 min timer, visibile on bottom right
+- `<leader> t T` -> Start customer minture timer, visibile on bottom right
+- `<leader> t` x-> Cancels timer, visibile on bottom right
+- `<leader> o t` -> Open horizontal terminal
+- `<leader> o T` -> Open vertical terminal
+- `<leader> o f` -> Open floating terminal
+
+- `<leader> q` -> List of all diagnostics
+- `Hold CTRL + h/j/k/l` -> Move cursor between windows if multiple windows are open.
+- `yy` -> Yank the line
+- `y3y` -> Yank 3 lines below completely
+- `y3j` -> Yank 3 lines below from cursor point
+- `y3k` -> Yank 3 lines above from the cursor point
+- `leader s f` -> search in files
+- `<leader> s g` -> Search by grep
+- `<leader> s w` -> search current word
+- `<leader> s d` -> search diagnostics
+- `<leader><leader>` -> Search buffers (list of open files)
+- `grr` -> Go to reference
+- `gri`, `grd`,
