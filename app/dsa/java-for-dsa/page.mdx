@@ -1,0 +1,595 @@
+---
+title: Java For DSA
+description: This is a quick recap of Java required for DSA
+difficulty: Easy
+tags:
+  - java
+---
+
+## Basic Intro
+
+Java is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible. It is widely used for building web applications, mobile applications, and enterprise software. Java is platform-independent at the bytecode level, meaning you can write code once and run it anywhere with a Java Virtual Machine (JVM).
+
+## Taking Input in Java using Scanner
+
+```java {5-7} copy showLineNumbers
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        String name = scanner.nextLine();
+        int number = scanner.nextInt();
+        System.out.println("You entered: " + number);
+        System.out.println("Hello, " + name + "!");
+        scanner.close();
+    }
+}
+```
+
+## Primitive DataTypes in Java
+
+- byte: 8-bit integer.
+- short: 16-bit integer.
+- int: 32-bit integer.
+- long: 64-bit integer.
+- float: 32-bit floating-point.
+- double: 64-bit floating-point.
+- char: 16-bit Unicode character.
+- boolean: True/False.
+
+## Sum of two numbers from Input
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter first number: ");
+        int num1 = scanner.nextInt();
+        System.out.println("Enter second number: ");
+        int num2 = scanner.nextInt();
+        int sum = num1 + num2;
+        System.out.println("The sum is: " + sum);
+        scanner.close();
+    }
+}
+```
+
+## Type Converstion and Type Casting
+
+```java
+int num = 100;
+double result = num; // Implicit conversion
+
+double num = 100.5;
+int result = (int) num; // Explicit casting -> Output is 100
+
+byte a = 10;
+byte b = 20;
+int sum = a + b; // Promoted to int -> Promoted to int -> Output is 30
+```
+
+- **Widening** -> Two datatypes are automatically converted. This happens when we assign value of smaller datatype to bigger datatype. And two datatypes must be compatible.
+- **Narrowing** -> This happens when we forcefully do the conversion like float to int etc. (Overflow issue could happen here, so it is risky sometimes)
+
+## Difference between int and Integer (Similarly between others)
+
+- `int` is primitive and `Integer` is reference or Object type.
+- Many primitive types have wrapper classes like int have Integer.
+- All the primitive datatypes can be represented in the Object form. It is helpful to access helper methods.
+- String in itself is a final class and Immutable and not the primitive type.
+
+## Conditions and Loopings
+
+- `if-else` and multiple `if-else if-else if-else`
+- For Loop: `for (initialization; condition; increment/decrement){}`
+- For Loop with Array `for(int num: numbers) { System.out.println(num) }; // consider numbers is int[] array`
+- While Loop: `while(condition) { ... }`
+- Do-While Loop: `do{ ... }while(condition);`
+- Switch (Nested switch is also same, just switch nested under parent switch)
+
+```java
+switch (variable) {
+	case value1:
+		// Code to execute if variable == value1
+		break; // Optional but recommended
+	case value2:
+		// Code to execute if variable == value2
+		break;
+	default:
+		// Code to execute if no case matches
+}
+```
+
+- Enhanced Switch:
+
+```java
+String fruit = "Apple";
+String description = switch (fruit) {
+	case "Apple" -> "Apples are red or green.";
+	case "Banana" -> "Bananas are yellow.";
+	case "Orange" -> "Oranges are orange.";
+	default -> "Unknown fruit.";
+};
+System.out.println(description);
+```
+
+- `## == vs` -> `==` Compares memory references for Object and works with primitives and objects ex: if (a == b), and `.equals()` -> Compares content and primarily used for object comparison if (a.equals(b))
+
+**Tip**
+
+- Use for loop when the number of iterations is known.
+- Use while loop when the iterations depend on a condition evaluated at runtime. While loop evaluates the condition before executing the loop body.
+- Do while loop executes the loop body at least once before evaluating the condition.
+
+## Simple Problem to count the occurrence
+
+```java
+int[] numbers = {1, 2, 3, 1, 2, 1};
+int target = 1;
+int count = 0;
+for (int num : numbers) {
+    if (num == target) {
+        count++;
+    }
+}
+System.out.println("Occurrences of " + target + ": " + count);
+```
+
+## Methods and Functions
+
+```java
+accessModifier returnType methodName(parameterList) {
+    // method body
+    return value; // Optional, based on returnType
+}
+
+methodName(paramters); // calls the methods
+```
+
+## Pass By Value and Reference
+
+Java is always pass-by-value. Primitive: Copies the value. Object/Non-Primitive: Copies the reference. The object's state can be modified. The caller's reference itself cannot be changed.
+
+## Scope
+
+- There are multiple scopes namely: Method Scope, Block Scope, Loop Scope
+- **Shadowing** - Shadowing occurs when a local variable has the same name as an instance variable. (Not recommended)
+
+## Variable arguments (Varargs)
+
+- Varargs allow passing a variable number of arguments to a method. Internally, they are treated as an array.
+
+## Collections In Java
+
+- **Collection** and Collections are different things in java. A Collection is an interface, whereas Collections is a class. Collections can hold only Object and can not hold primitive data types like int, double etc.
+- **Set** -> Unique. Ex: `Set fruits = new HashSet();`
+- **List** -> Ordered, duplicates. Ex: `List<String> fruits = new ArrayList();`
+- **Queue** -> FIFO. Ex: `Queue<Integer> fruits = new LinkedList();`
+- **Map** -> Key `<->` Value. `putIfAbsent` can be used instead of `put` to be sure that insertion happens if there is no already key present. So we can avoid bugs and error of overwriting the element. `Map<String, Integer> fruitsCalories = new HashMap();`
+- **Arrays** -> `int [] arrayName = new int[size];` and `int [][] my2DArray = new int[rows][columns];`. It is good practice to provide the size of array at compile time and NEVER at runtime because the input size from user can be ANYTHING which is very dangerous. Array -> fixed size, primitives supported. ArrayList -> dynamic size, Objects only (use Integer instead of int).
+
+## Strings
+
+- A String in Java is a object that represents the collection or sequence of characters. It is represented by the java.lang.String class. String is not a primitive data type. It is a final class data type which provides several helper functions. By default Strings are Immutable. We can not directly change the characters of string as they are immutable, but we can change the string as a whole if needed. So to make the string mutable we make use of StringBuilder. To calculate the length of string we have .length() method and not `.length`. `String s = "AnyString";` If you’re repeatedly building a string inside a loop, use StringBuilder. Prefer StringBuilder over String += inside loops
+
+## Iterators
+
+Iterator is an object used to loop through elements of collections. The iterator() method in ArrayList returns an Iterator type object. Iterator method is provided by collection interface and since MAP is not a part of the collection interface iterator is not available on map. Access to iterator is by : Set, List, Queue. With map we can achieve the same thing but with different technique. We use entrySet() in map for this.
+Methods provided by iterators are:
+
+- hasNext(): Checks if there are more elements to iterate. Returns true if more elements are available; otherwise, false.
+- next(): Retrieves the next element. Always call hasNext() before next() to avoid a NoSuchElementException.
+- remove(): Deletes the last element returned by next(). This method can only be used once after calling next().
+- forEachRemaining(Consumer\<? super E> action): A Java 8 method that applies a given action to all remaining elements. It automates the iteration process, so you don’t need to manually check for more elements.
+
+```java
+// ---------- Iterator ----------
+Iterator<Integer> it = list.iterator();
+it.hasNext();                // More elements?
+it.next();                   // Get next element
+it.remove();                 // Remove current element safely
+// ---------- Typical Usage ----------
+Iterator<Integer> it = list.iterator();
+while (it.hasNext()) {
+    int x = it.next();
+    if (x % 2 == 0) {
+        it.remove();         // Safe removal while iterating
+    }
+}
+```
+
+---
+
+## Declaration and Initializing major data structures cheatsheet
+
+### Arrays
+
+```java
+int[] arr = new int[10];              // fixed size, zero-init
+int[] arr2 = {1, 2, 3, 4};            // literal init
+int[][] grid = new int[3][4];         // 2D matrix
+Arrays.fill(arr, -1);
+int[] copy = Arrays.copyOf(arr, arr.length);
+```
+
+### Strings
+
+```java
+String s = "hello";
+StringBuilder sb = new StringBuilder(); // mutable strings
+sb.append("a").reverse().toString();
+char[] chars = s.toCharArray();
+String str1 = "Shubham";
+
+String str2 = new String("Shubham");
+
+char[] charArr = {'s', 'h', 'u', 'b', 'h', 'a', 'm'};
+String str3 = new String(charArr);
+
+StringBuilder sb = new StringBuilder("Shubham");
+String str5 = sb.toString();
+
+s.length();                  // Length
+s.charAt(i);                 // Character at index
+s.substring(l, r);           // Substring [l, r)
+s.equals(other);             // Content equality
+s.indexOf(c);                // First occurrence
+s.toCharArray();             // String -> char[]
+StringBuilder sb = new StringBuilder();
+sb.append(x);                // Append
+sb.deleteCharAt(i);          // Delete character
+sb.setCharAt(i, c);          // Modify character
+sb.reverse();                // Reverse
+sb.toString();               // StringBuilder -> String
+new String(charArray);       // char[] -> String
+String.valueOf(x);           // Primitive/Object -> String
+Integer.parseInt(s);         // String -> int
+String.format("%s-%03d", "ID", 7); // "ID-007"
+System.out.println(x);       // Print
+```
+
+### Matrix
+
+```java
+int[][] m = new int[rows][cols];
+for (int[] row : m) Arrays.fill(row, 0);
+
+Arrays.toString(arr);          // print 1D array
+Arrays.deepToString(matrix);   // print 2D array
+```
+
+### HashMaps / Hashing
+
+```java
+Map<String, Integer> map = new HashMap<>();
+map.put("a", 1);
+map.getOrDefault("a", 0);
+Set<Integer> set = new HashSet<>();
+Map<Integer, Integer> ordered = new TreeMap<>(); // sorted keys
+```
+
+### LinkedList
+
+```java
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int val) { this.val = val; }
+}
+LinkedList<Integer> ll = new LinkedList<>(); // built-in doubly LL
+```
+
+### Stacks & Queues
+
+```java
+Deque<Integer> stack = new ArrayDeque<>();   // preferred over Stack class
+stack.push(1); stack.pop(); stack.peek();
+
+Queue<Integer> queue = new LinkedList<>();
+queue.offer(1); queue.poll(); queue.peek();
+
+Deque<Integer> deque = new ArrayDeque<>();   // for sliding window max
+```
+
+### Trees
+
+```java
+class TreeNode {
+    int val;
+    TreeNode left, right;
+    TreeNode(int val) { this.val = val; }
+}
+```
+
+### Tries
+
+```java
+class TrieNode {
+    TrieNode[] children = new TrieNode[26];
+    boolean isEnd;
+}
+TrieNode root = new TrieNode();
+```
+
+### Union-Find (DSU)
+
+```java
+int[] parent = new int[n], rank = new int[n];
+for (int i = 0; i < n; i++) parent[i] = i;
+
+int find(int x) { return parent[x] == x ? x : (parent[x] = find(parent[x])); }
+void union(int a, int b) { parent[find(a)] = find(b); }
+```
+
+### Graphs
+
+```java
+List<List<Integer>> adj = new ArrayList<>();
+for (int i = 0; i < n; i++) adj.add(new ArrayList<>());
+adj.get(u).add(v);                       // adjacency list
+
+int[][] adjMatrix = new int[n][n];       // adjacency matrix
+
+Map<Integer, List<int[]>> weighted = new HashMap<>(); // {node: [neighbor, weight]}
+```
+
+### Segment Tree
+
+```java
+int[] tree = new int[4 * n];   // build/update/query recursively
+```
+
+### Fenwick Tree (BIT)
+
+```java
+int[] bit = new int[n + 1];
+void update(int i, int delta) { for (; i <= n; i += i & (-i)) bit[i] += delta; }
+int query(int i) { int s = 0; for (; i > 0; i -= i & (-i)) s += bit[i]; return s; }
+```
+
+---
+
+### Choose the Right Data Structure
+
+| Need                     | Use                              |
+| ------------------------ | -------------------------------- |
+| O(1) lookup              | `HashMap`, `HashSet`             |
+| Sorted data              | `TreeMap`, `TreeSet`             |
+| Min/Max repeatedly       | `PriorityQueue`                  |
+| FIFO                     | `Queue (ArrayDeque)`             |
+| LIFO                     | `Deque (ArrayDeque)`             |
+| Random access            | `ArrayList`                      |
+| Frequency counting       | `HashMap`                        |
+| Preserve insertion order | `LinkedHashMap`, `LinkedHashSet` |
+
+### List | ArrayList (Dynamic Array)
+
+```java
+List<Integer> list = new ArrayList<>();              // Dynamic array
+List<String> fruitsString = new ArrayList();  		 // example-1
+List fruits = new ArrayList(); 						 // example-1 -- works without <> also.
+List fruits = List.of("Apple", "Orange");            // immutable list.
+list.add(x);                                         // Append
+list.add(i, x);                                      // Insert at index
+list.get(i);                                         // Read element
+list.set(i, x);                                      // Update element
+list.remove(i);                                      // Remove by index
+list.remove(Integer.valueOf(x));                     // Remove by value
+list.contains(x);                                    // Check existence
+list.size();                                         // Number of elements
+list.isEmpty();                                      // Is empty?
+```
+
+### Stack (LIFO)
+
+```java
+Deque<Integer> stack = new ArrayDeque<>();           // Stack implementation
+stack.push(x);                                       // Push
+stack.pop();                                         // Pop
+stack.peek();                                        // Top element
+```
+
+### Queue (Using Deque, FIFO)
+
+```java
+Queue<Integer> q = new ArrayDeque<>();               // Queue implementation
+q.offer(x);                                          // Enqueue
+q.poll();                                            // Dequeue
+q.peek();                                            // Front element
+
+Deque<Integer> dq = new ArrayDeque<>();              // Double-ended queue
+dq.offerFirst(x);                                    // Add front
+dq.offerLast(x);                                     // Add back
+dq.pollFirst();                                      // Remove front
+dq.pollLast();                                       // Remove back
+dq.peekFirst();                                      // View front
+dq.peekLast();                                       // View back
+```
+
+### PriorityQueue (Heap)
+
+```java
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();                          // Min Heap
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder()); // Max Heap
+PriorityQueue<int[]> pq = new PriorityQueue<>(                  // Custom comparator
+    (a, b) -> Integer.compare(a[0], b[0])
+);
+pq.offer(x);                                          // Insert
+pq.poll();                                            // Remove top
+pq.peek();                                            // View top
+```
+
+### HashSet
+
+```java
+Set<Integer> set = new HashSet<>();                  // Unique unordered elements
+set.add(x);                                          // Insert
+set.remove(x);                                       // Delete
+set.contains(x);                                     // Exists?
+set.size();                                          // Size
+```
+
+### TreeSet
+
+```java
+TreeSet<Integer> set = new TreeSet<>();              // Sorted unique elements
+set.floor(x);                                        // Greatest <= x
+set.ceiling(x);                                      // Smallest >= x
+set.lower(x);                                        // Greatest < x
+set.higher(x);                                       // Smallest > x
+set.first();                                         // Minimum
+set.last();                                          // Maximum
+```
+
+### HashMap
+
+```java
+Map<Integer, Integer> map = new HashMap<>();         // Key-Value store
+map.put(k, v);                                       // Insert / Update
+map.get(k);                                          // Retrieve value
+map.getOrDefault(k, 0);                              // Default if absent
+map.containsKey(k);                                  // Key exists?
+map.remove(k);                                       // Remove key
+map.put(x, map.getOrDefault(x, 0) + 1);              // Frequency count
+map.merge(x, 1, Integer::sum);                       // Cleaner frequency count
+for (Map.Entry<Integer, Integer> e : map.entrySet()) // Iterate entries
+{
+    int key = e.getKey();
+    int value = e.getValue();
+}
+```
+
+### TreeMap
+
+```java
+TreeMap<Integer, Integer> map = new TreeMap<>();     // Sorted Key-Value store
+map.floorKey(x);                                     // Greatest key <= x
+map.ceilingKey(x);                                   // Smallest key >= x
+map.lowerKey(x);                                     // Greatest key < x
+map.higherKey(x);                                    // Smallest key > x
+```
+
+---
+
+### Arrays / Collections Utilities
+
+```java
+Arrays.sort(arr);                                    // Sort array
+Arrays.fill(arr, 0);                                 // Fill array
+Arrays.binarySearch(arr, x);                         // Binary search
+Arrays.equals(a,b);
+Arrays.deepEquals(matrix1,matrix2);
+Arrays.stream(arr).sum();
+Collections.sort(list);                              // Sort list
+Collections.sort(list, Comparator.reverseOrder());   // Reverse sort
+Collections.reverse(list);                           // Reverse list
+Collections.shuffle(list);                           // Shuffle
+Collections.max(list);                               // Maximum element
+Collections.min(list);                               // Minimum element
+Collections.swap(list, i, j);                        // Swap elements
+Collections.frequency(list, x);                      // Frequency of x in list
+```
+
+### Comparators
+
+```java
+Integer.compare(a, b);                               // Ascending
+Integer.compare(b, a);                               // Descending
+Arrays.sort(arr, (a, b) -> Integer.compare(a, b)); // Ascending (Preferred, avoid overflow)
+Arrays.sort(arr, (a, b) -> Integer.compare(b, a)); // Descending (Preferred, avoid overflow)
+Comparator.comparing(Person::getAge)                 // Sort by age
+          .thenComparing(Person::getName);           // Then by name
+Comparator.comparingInt(String::length);             // Sort by string length
+Arrays.sort(arr, (a, b) -> Integer.compare(a[0], b[0]));
+```
+
+### Conversions
+
+```java
+char[] ch = s.toCharArray();                         // String -> char[]
+String str = new String(ch);                         // char[] -> String
+List<Integer> list = Arrays.asList(arr);             // Array -> List
+Integer[] arr = list.toArray(new Integer[0]);        // List -> Array
+```
+
+### Maths
+
+```java
+Math.max(a,b);
+Math.min(a,b);
+Math.abs(x);
+Math.sqrt(x);
+Math.pow(a,b);
+Math.ceil(x);
+Math.floor(x);
+Math.round(x);
+```
+
+### Bit Manipulation
+
+```java
+n << k;                 // Left shift (n * 2^k)
+n >> k;                 // Right shift with sign (n / 2^k)
+n >>> k;                // Unsigned right shift (fills with 0s)
+n & mask;               // AND (check/extract bits)
+n | mask;               // OR (set bits)
+n ^ mask;               // XOR (toggle bits / find unique)
+~n;                     // NOT (invert all bits)
+(n & 1) == 0;           // Is even?
+(n & 1) == 1;           // Is odd?
+n & (n - 1);            // Clear lowest set bit
+(n & (n - 1)) == 0;     // Is power of 2? (n > 0)
+n & -n;                 // Isolate lowest set bit (Fenwick Tree)
+n |= (1 << i);          // Set i-th bit
+n &= ~(1 << i);         // Clear i-th bit
+n ^= (1 << i);          // Toggle i-th bit
+(n & (1 << i)) != 0;    // Is i-th bit set?
+Integer.bitCount(n);                    // Count set bits
+Integer.numberOfLeadingZeros(n);        // Leading zeros
+Integer.highestOneBit(n);               // Highest power of 2 <= n
+Integer.lowestOneBit(n);                // Lowest set bit
+```
+
+### Interview Gotchas
+
+```java
+list.remove(Integer.valueOf(5));                     // Remove value, not index
+a.equals(b);                                         // Compare Integer objects
+Integer.compare(a, b);                               // Avoid comparator overflow
+new ArrayDeque<>();                                  // Preferred Stack/Queue
+==              // Primitive value / Object reference
+.equals()       // Object content
+list.remove(1);                 // Remove index
+list.remove(Integer.valueOf(1));// Remove value
+map.get(k);                     // May return null
+ArrayDeque over Stack               // Modern Java
+```
+
+### Complexity
+
+| DS            |  Search   |  Insert  |  Delete  |
+| ------------- | :-------: | :------: | :------: |
+| ArrayList     | O(1)/O(n) |  O(1)\*  |   O(n)   |
+| HashMap       |   O(1)    |   O(1)   |   O(1)   |
+| HashSet       |   O(1)    |   O(1)   |   O(1)   |
+| TreeMap       | O(log n)  | O(log n) | O(log n) |
+| TreeSet       | O(log n)  | O(log n) | O(log n) |
+| PriorityQueue |     —     | O(log n) | O(log n) |
+| ArrayDeque    |   O(1)    |   O(1)   |   O(1)   |
+
+### Mental Model
+
+```text
+Lookup?         -> HashMap / HashSet
+Sorted?         -> TreeMap / TreeSet
+Top K?          -> PriorityQueue
+BFS?            -> Queue (ArrayDeque)
+DFS?            -> Stack (ArrayDeque)
+Sliding Window? -> Deque
+Frequency?      -> HashMap
+Fast Index?     -> ArrayList
+```

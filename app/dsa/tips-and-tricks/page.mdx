@@ -1,0 +1,102 @@
+---
+title: Tips and Tricks
+description: Common strategies and techniques for solving Data Structures and Algorithms problems.
+difficulty: Easy
+tags:
+  - tips
+---
+
+# WIP
+
+## Before Coding
+
+- Understand the constraints first. They usually hint at the expected complexity.
+- Solve the brute-force solution first, then optimize.
+- Dry-run your algorithm on a small example before coding.
+- Think about edge cases before writing code.
+
+---
+
+## Constraint → Expected Complexity
+
+| Constraints      | Target Complexity              |
+| ---------------- | ------------------------------ |
+| `n <= 20`        | `O(2ⁿ)` (Backtracking/Bitmask) |
+| `n <= 100`       | `O(n³)`                        |
+| `n <= 1,000`     | `O(n²)`                        |
+| `n <= 100,000`   | `O(n log n)` / `O(n)`          |
+| `n >= 1,000,000` | `O(n)`                         |
+
+## Complexity → Common Techniques
+
+| Complexity   | Common Techniques                                          |
+| ------------ | ---------------------------------------------------------- |
+| `O(1)`       | HashMap, HashSet, Array indexing                           |
+| `O(log n)`   | Binary Search, TreeMap, TreeSet, Heap, BIT, Segment Tree   |
+| `O(n)`       | Sliding Window, Two Pointers, Prefix Sum, BFS/DFS, Hashing |
+| `O(n log n)` | Sorting + Processing, Divide & Conquer                     |
+| `O(n²)`      | Double Loops, DP, Graph on Dense Matrix                    |
+| `O(2ⁿ)`      | Backtracking                                               |
+| `O(n!)`      | Permutations                                               |
+
+---
+
+## Pattern Recognition
+
+| If the problem mentions...    | Think...                        |
+| ----------------------------- | ------------------------------- |
+| Pair in array                 | HashMap / Two Pointers          |
+| Triplets                      | Sorting + Two Pointers          |
+| Contiguous subarray/substring | Sliding Window / Prefix Sum     |
+| Subarray Sum                  | Prefix Sum + HashMap            |
+| Top K                         | Heap (PriorityQueue)            |
+| K-th Smallest/Largest         | Heap / Quick Select             |
+| Merge Intervals               | Sort + Merge                    |
+| Connected Components          | DFS / BFS / Union Find          |
+| Shortest Path                 | BFS / Dijkstra                  |
+| Dependency / Course Schedule  | Topological Sort                |
+| Dictionary / Prefix Search    | Trie                            |
+| Range Query                   | Prefix Sum / BIT / Segment Tree |
+| Parentheses                   | Stack                           |
+| Next Greater/Smaller          | Monotonic Stack                 |
+| Generate All                  | Backtracking                    |
+| Dynamic Connectivity          | Union Find                      |
+| Optimize Answer               | Binary Search on Answer         |
+
+---
+
+## Optimization Checklist
+
+Whenever you write nested loops, ask:
+
+- Can hashing remove one loop?
+- Can sorting help?
+- Can prefix sums help?
+- Can binary search help?
+- Can memoization help?
+
+---
+
+## Interview Flow
+
+1. Clarify assumptions.
+2. Explain the brute-force solution.
+3. Analyze complexity.
+4. Optimize step by step.
+5. Code.
+6. Dry-run.
+7. State Time & Space Complexity.
+
+---
+
+## Final Checklist
+
+- Empty input
+- Single element
+- Duplicate values
+- Negative numbers
+- Integer overflow
+- Off-by-one errors
+- Correct return value
+- Time Complexity
+- Space Complexity

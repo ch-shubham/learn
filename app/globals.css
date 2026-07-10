@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ----------------------------------------------------
+   Catppuccin Code Block Background Overrides
+   ---------------------------------------------------- */
+
+/* Light Mode (Latte Mantle) */
+:root pre {
+  background-color: #e6e9ef !important;
+}
+
+/* Dark Mode (Mocha Mantle) */
+.dark pre {
+  background-color: #181825 !important;
+}
+
+/* Optional: Fix inline code blocks (like `this`) to match */
+:root code:not([data-language]) {
+  background-color: #e6e9ef !important;
+}
+
+.dark code:not([data-language]) {
+  background-color: #181825 !important;
+}
