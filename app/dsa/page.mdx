@@ -2,31 +2,7 @@
 title: List of Topics
 ---
 
-import { TopicIndex } from "@/components/TopicIndex";
+import meta from "./_meta.ts";
+import { ContentIndex } from "@/components/ContentIndex";
 
-<TopicIndex
-  title="List of Topics"
-  items={[
-    {
-      title: "Resources for DSA",
-      href: "/dsa/resources-for-dsa",
-      description: "Resources for DSA",
-    },
-    {
-      title: "Java for DSA",
-      href: "/dsa/java-for-dsa",
-      description: "Introduction to Java for DSA",
-    },
-    {
-      title: "Tips and Tricks for DSA",
-      href: "/dsa/tips-and-tricks",
-      description:
-        "Common strategies and techniques for solving Data Structures and Algorithms problems.",
-    },
-    {
-      title: "Time and Space Complexities",
-      href: "/dsa/time-and-space-complexity",
-      description: "Understanding time and space complexities in algorithms.",
-    },
-  ]}
-/>
+<ContentIndex meta={meta} variant="list" />

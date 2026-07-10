@@ -2,16 +2,7 @@
 title: List of Cheatsheets
 ---
 
-import { TopicIndex } from "@/components/TopicIndex";
+import meta from "./_meta.ts";
+import { ContentIndex } from "@/components/ContentIndex";
 
-<TopicIndex
-  title="List of Cheatsheets"
-  items={[
-    {
-      title: "Neovim",
-      href: "/cheatsheets/neovim",
-      description:
-        "A quick reference for common Neovim commands and shortcuts.",
-    },
-  ]}
-/>
+<ContentIndex meta={meta} variant="list" />

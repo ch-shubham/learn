@@ -36,12 +36,13 @@ These rules exist because we broke the build several times finding them out. Fol
   - All navigation is defined in their respective folders under file: `_meta.ts`. There is a global \_meta at root level to manage root level navigation.
 - Every topic is iteslf a folder having `page.mdx` following nextjs routing conventions
 - Every new subject like dsa, java is of `type: page` to be mentioned in root `_meta.ts`
-- Update the \_meta.ts and `<TopicIndex>` under root `page.mdx` of respective subject on addition of new file/subject.
+- Update the \_meta.ts under root `page.mdx` of respective subject on addition of new file/subject.
 - Keep filename following `-` convention for better readiability ex: **`time-and-space=complexity`**
 
 ## TODOs
 
 - `resolutions: { zod: "4.3.6" }` This pins around the Zod 4.4 bug we hit earlier (nextra#5008). It's the right move fornow, but worth periodically checking if Nextra ships an official fix so you can remove the pin and stay current with Zod. [Open Issue](https://github.com/shuding/nextra/issues/4989)
+  = Cleanup of ContentIndex component (description, bagde etc not support so clean up or find workaround)
 
 ## Issues
 
