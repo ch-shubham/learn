@@ -1,0 +1,35 @@
+---
+title: Databases
+description: Databases Description
+difficulty: Easy
+tags:
+  - databases
+  - scalability
+---
+
+## Types of Databases
+- Relational Databases
+	- Also termed as Relation Database Management System (RDBMS) or SQL databases.
+	- Most popular ones are: MySQL, Oracle database, PostgreSQL etc.
+	- Stores the data in rows and columns. And we can perform the JOIN operations across different database tables.
+- Non-Relation Databases
+	- Also termed as NoSQL databases.
+	- Most popular ones are: CouchDB, Neo4j, Cassandra, HBase, Amazon DynamoDB etc
+	- These are grouped in 4 categories: Key-Value Stores, Graph stores, column stores, and document stores.
+	- Join operations are generally not supported in non-relation db.
+
+## Which database to use?
+
+For most developers relational databases are the best option bevause they are around for more over 40years, and historically they have worked well.
+
+Non-Relational might be the right choice if:
+- Application requires super low latency.
+- Data is unstructured or you do not have any relational data.
+- You only need to serialize and deserialize the data (JSON, XML etc)
+- You need to store massive amount of data (Like analytics)
+
+
+**Tip:** If you are unsure and have no particular reason to select what? Then go for relational database (say PostgreSQL) with clarification: I am unsure about the data right now and since relational databases have be around for so long, I would go with safer bet with relational, and on MVP or POC if feel it does not work out then we can switch to no-sql if required before the scaling.
+
+
+
